@@ -1,5 +1,7 @@
 package com.aptzip.dealMap.service;
 
+import com.aptzip.dealMap.dto.request.DongRequest;
+import com.aptzip.dealMap.dto.request.GugunRequest;
 import com.aptzip.dealMap.dto.response.DongResponse;
 import com.aptzip.dealMap.dto.response.GugunResponse;
 import com.aptzip.dealMap.dto.response.SidoResponse;
@@ -27,19 +29,23 @@ public class DealMapService {
     }
 
     // 구군 이름으로 조회
-    public List<GugunResponse> getGugunNamesBySidoName(String sidoName) {
-        List<String> dongCodes = dealMapRepository.findGugunNameBySidoName(sidoName);
+    public List<GugunResponse> getGugunNamesBySidoName(GugunRequest gugunRequest) {
+        List<String> dongCodes = dealMapRepository.findGugunNameBySidoName(gugunRequest.sidoName());
         return dongCodes.stream().map(gugunname -> new GugunResponse(gugunname))
                 .distinct()
                 .collect(Collectors.toList());
     }
 
     // 시도 이름과 구군 이름으로 조회
-    public List<DongResponse> getDongCodesBySidoAndGugun(String sidoName, String gugunName) {
-        List<Object[]> dongCodes = dealMapRepository.findBySidoNameAndGugunName(sidoName,gugunName);
-        return dongCodes.stream()
-                .map(result -> new DongResponse((String) result[0], (String) result[1])) // 0: dong_code, 1: dong_name
-                .distinct()
+    public List<DongResponse> getDongCodesBySidoAndGugun(DongRequest dongRequest) {
+        // DongRequest에서 sidoName과 gugunName 추출
+        String sidoName = dongRequest.sidoName();
+        String gugunName = dongRequest.gugunName();
+
+        List<Object[]> results = dealMapRepository.findBySidoNameAndGugunName(sidoName, gugunName);
+
+        return results.stream()
+                .map(result -> new DongResponse((String) result[0], (String) result[1])) // 변환
                 .collect(Collectors.toList());
     }
 }
