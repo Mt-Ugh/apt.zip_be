@@ -1,4 +1,4 @@
-HELP.md
+# Build directories
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -110,7 +110,6 @@ fabric.properties
 # that are supposed to be shared within teams.
 
 .idea/*
-
 !.idea/codeStyles
 !.idea/runConfigurations
 
@@ -221,3 +220,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Environment variable files
+application.properties
+application.yml
+src/main/resources/application.properties
+src/main/resources/application.yml
