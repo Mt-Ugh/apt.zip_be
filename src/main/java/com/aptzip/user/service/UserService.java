@@ -73,4 +73,12 @@ public class UserService {
 
         user.updateProfileUrl(updateProfileUrlRequest.profileUrl());
     }
+
+    @Transactional
+    public void withdrawUser(String userUuid) {
+        User user = userRepository.findByUserUuid(userUuid)
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
+
+        userRepository.delete(user);
+    }
 }

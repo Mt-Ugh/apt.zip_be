@@ -44,4 +44,10 @@ public class UserController {
         userService.updateProfileUrl(userUuid, updateProfileUrlRequest);
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/delete/{userUuid}")
+    public ResponseEntity<Void> withdrawUser(@PathVariable String userUuid) {
+        userService.withdrawUser(userUuid);
+        return ResponseEntity.ok().build();
+    }
 }
