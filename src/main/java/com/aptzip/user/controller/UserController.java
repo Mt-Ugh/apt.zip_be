@@ -1,6 +1,7 @@
 package com.aptzip.user.controller;
 
 import com.aptzip.user.dto.request.AddUserRequest;
+import com.aptzip.user.dto.request.UpdateProfileUrlRequest;
 import com.aptzip.user.dto.request.UpdateUserRequest;
 import com.aptzip.user.dto.response.UserDetailResponse;
 import com.aptzip.user.service.UserService;
@@ -35,6 +36,12 @@ public class UserController {
     @PutMapping("/update/profile/{userUuid}")
     public ResponseEntity<Void> updateUser(@PathVariable("userUuid") String userUuid, @RequestBody UpdateUserRequest updateUserRequest) {
         userService.updateUser(userUuid, updateUserRequest);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/update/profileUrl/{userUuid}")
+    public ResponseEntity<Void> updateProfileUrl(@PathVariable("userUuid") String userUuid, @RequestBody UpdateProfileUrlRequest updateProfileUrlRequest) {
+        userService.updateProfileUrl(userUuid, updateProfileUrlRequest);
         return ResponseEntity.ok().build();
     }
 }

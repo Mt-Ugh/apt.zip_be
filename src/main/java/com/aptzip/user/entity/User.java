@@ -87,6 +87,12 @@ public class User implements UserDetails { // UserDetails를 상속받아 인증
         return this;
     }
 
+    public User updateProfileUrl(String profileUrl) {
+        this.profileUrl = profileUrl;
+
+        return this;
+    }
+
     public void encodePassword(BCryptPasswordEncoder encoder) {
         this.password = encoder.encode(this.password);
     }
