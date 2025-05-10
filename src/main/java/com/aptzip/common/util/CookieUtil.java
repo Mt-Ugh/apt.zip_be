@@ -16,6 +16,16 @@ public class CookieUtil {
         response.addCookie(cookie);
     }
 
+    // HttpOnly + Secure 쿠키 추가
+    public static void addHttpOnlyCookie(HttpServletResponse response, String name, String value, int maxAge) {
+        Cookie cookie = new Cookie(name, value);
+        cookie.setPath("/");
+        cookie.setMaxAge(maxAge);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        response.addCookie(cookie);
+    }
+
     // 쿠키의 이름을 입력받아 쿠키 삭제
     public static void deleteCookie(HttpServletRequest request, HttpServletResponse response, String name) {
         Cookie[] cookies = request.getCookies();
