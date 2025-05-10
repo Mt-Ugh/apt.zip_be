@@ -1,6 +1,7 @@
 package com.aptzip.user.service;
 
 import com.aptzip.user.dto.request.AddUserRequest;
+import com.aptzip.user.dto.response.UserDetailResponse;
 import com.aptzip.user.entity.User;
 import com.aptzip.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,5 +31,17 @@ public class UserService {
     public User findByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
+    }
+
+    public UserDetailResponse findByUuid(String userUuid) {
+        User user = userRepository.findByUserUuid(userUuid)
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
+
+        return new UserDetailResponse(
+                user.getName(),
+                user.getNickname(),
+                user.getEmail(),
+                user.getPhoneNumber()
+        );
     }
 }
