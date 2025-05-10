@@ -74,7 +74,17 @@ public class WebSecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/token", "/auth/**", "/oauth2/**").permitAll()
+                        .requestMatchers(
+                                "/auth/**", "/oauth2/**",
+                                "/review/list",
+                                "/review/detail",
+                                "/qna/list",
+                                "/qna/detail",
+                                "/interestArea/regist",
+                                "/interestAres/fame",
+                                "/dealMap/**",
+                                "/amenitiesMap/**"
+                        ).permitAll()
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll()
                 )

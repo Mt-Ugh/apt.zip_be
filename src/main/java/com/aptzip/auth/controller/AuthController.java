@@ -1,7 +1,10 @@
 package com.aptzip.auth.controller;
 
 import com.aptzip.auth.dto.request.SigninRequest;
+import com.aptzip.auth.dto.response.LoginResponse;
 import com.aptzip.auth.dto.response.TokenResponse;
+import com.aptzip.auth.dto.response.TokenUserResponse;
+import com.aptzip.auth.dto.response.TokensResponse;
 import com.aptzip.auth.service.AuthService;
 import com.aptzip.common.config.jwt.JwtProperties;
 import com.aptzip.common.util.CookieUtil;
@@ -22,11 +25,11 @@ public class AuthController {
     private static final String REFRESH_TOKEN_COOKIE_NAME = "refresh_token";
 
     @PostMapping("/signin")
-    public ResponseEntity<TokenResponse> signin(
+    public ResponseEntity<LoginResponse> signin(
             @RequestBody SigninRequest request,
             HttpServletResponse response
     ) {
-        TokenResponse tokenResponse = authService.login(request);
+        TokenUserResponse tokenResponse = authService.login(request);
         int refreshTokenExpirySeconds = jwtProperties.getRefreshTokenExpirationDays() * 24 * 60 * 60;
 
         CookieUtil.addHttpOnlyCookie(
@@ -36,7 +39,12 @@ public class AuthController {
                 refreshTokenExpirySeconds
         );
 
-        return ResponseEntity.ok(tokenResponse);
+        return ResponseEntity.ok(new LoginResponse(
+                tokenResponse.accessToken(),
+                tokenResponse.userUuid(),
+                tokenResponse.nickname(),
+                tokenResponse.profileUrl()
+        ));
     }
 
     @PostMapping("/signout")
@@ -48,17 +56,15 @@ public class AuthController {
     }
 
     @PostMapping("/tokens")
-    public ResponseEntity<TokenResponse> reissueToken(
+    public ResponseEntity<TokensResponse> reissueToken(
             @CookieValue(name = REFRESH_TOKEN_COOKIE_NAME, required = false) String refreshToken,
-            HttpServletRequest request,
             HttpServletResponse response
     ) {
         if (refreshToken == null || refreshToken.isBlank()) {
             return ResponseEntity.badRequest().build();
         }
 
-        String userUuid = (String) request.getAttribute("userUuid");
-        TokenResponse tokenResponse = authService.reissue(userUuid, refreshToken);
+        TokenResponse tokenResponse = authService.reissue(refreshToken);
 
         CookieUtil.addHttpOnlyCookie(
                 response,
@@ -67,6 +73,6 @@ public class AuthController {
                 jwtProperties.getRefreshTokenExpirationDays() * 24 * 60 * 60
         );
 
-        return ResponseEntity.ok(tokenResponse);
+        return ResponseEntity.ok(new TokensResponse(tokenResponse.accessToken()));
     }
 }

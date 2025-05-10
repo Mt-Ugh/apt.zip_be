@@ -33,7 +33,7 @@ public class TokenProvider {
 
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE) // 헤더 typ : JWT
-                // 내용 iss : skes01149@naver.com(propertise 파일에서 설정한 값)
+                // 내용 iss : (propertise 파일에서 설정한 값)
                 .setIssuer(jwtProperties.getIssuer())
                 .setIssuedAt(now) // 내용 iat : 현재 시간
                 .setExpiration(expiry) // 내용 exp : expiry 멤버 변수값
@@ -66,9 +66,9 @@ public class TokenProvider {
     }
 
     // 토큰 기반으로 유저 ID를 가져오는 메서드
-    public Long getUserId(String token) {
+    public String getUserId(String token) {
         Claims claims = getClaims(token);
-        return claims.get("id", Long.class);
+        return claims.get("id", String.class);
     }
 
     private Claims getClaims(String token) {

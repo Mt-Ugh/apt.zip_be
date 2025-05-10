@@ -2,6 +2,8 @@ package com.aptzip.auth.service;
 
 import com.aptzip.auth.dto.request.SigninRequest;
 import com.aptzip.auth.dto.response.TokenResponse;
+import com.aptzip.auth.dto.response.TokenUserResponse;
+import com.aptzip.auth.dto.response.TokensResponse;
 import com.aptzip.auth.repository.RedisRefreshTokenRepository;
 import com.aptzip.common.config.jwt.JwtProperties;
 import com.aptzip.common.config.jwt.TokenProvider;
@@ -26,7 +28,7 @@ public class AuthService {
 
     // 일반 로그인
     @Transactional
-    public TokenResponse login(SigninRequest request) {
+    public TokenUserResponse login(SigninRequest request) {
         User user = userRepository.findByEmail(request.email())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
 
@@ -47,7 +49,7 @@ public class AuthService {
         refreshTokenRepository.save(user.getUserUuid(), refreshToken,
                 Duration.ofDays(jwtProperties.getRefreshTokenExpirationDays()));
 
-        return new TokenResponse(accessToken, refreshToken);
+        return new TokenUserResponse(accessToken, refreshToken, user.getUserUuid(), user.getNickname(), user.getProfileUrl());
     }
 
     // 로그아웃 (Redis에서 RefreshToken 삭제)
@@ -56,9 +58,13 @@ public class AuthService {
     }
 
     // 토큰 재발급
-    public TokenResponse reissue(String userUuid, String refreshToken) {
-        String stored = refreshTokenRepository.findByUserUuid(userUuid);
+    public TokenResponse reissue(String refreshToken) {
+        if(!tokenProvider.validToken(refreshToken)) {
+            throw new IllegalArgumentException("유효하지 않은 리프레시 토큰입니다.");
+        }
 
+        String userUuid = tokenProvider.getUserId(refreshToken);
+        String stored = refreshTokenRepository.findByUserUuid(userUuid);
         if (stored == null || !stored.equals(refreshToken)) {
             throw new IllegalArgumentException("유효하지 않은 리프레시 토큰입니다.");
         }
