@@ -1,18 +1,15 @@
 package com.aptzip.dealMap.repository;
 
 
-import com.aptzip.dealMap.dto.request.DongRequest;
-import com.aptzip.dealMap.dto.request.GugunRequest;
 import com.aptzip.dealMap.entity.DongCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface DealMapRepository extends JpaRepository<DongCode, String> {
+public interface DealMapDongRepository extends JpaRepository<DongCode, String> {
 
     // 시도 이름 
     @Query("SELECT DISTINCT d.sidoName FROM DongCode d")

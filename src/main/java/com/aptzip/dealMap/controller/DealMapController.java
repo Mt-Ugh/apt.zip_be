@@ -1,7 +1,9 @@
 package com.aptzip.dealMap.controller;
 
+import com.aptzip.dealMap.dto.request.DealListRequest;
 import com.aptzip.dealMap.dto.request.DongRequest;
 import com.aptzip.dealMap.dto.request.GugunRequest;
+import com.aptzip.dealMap.dto.response.DealListResponse;
 import com.aptzip.dealMap.dto.response.DongResponse;
 import com.aptzip.dealMap.dto.response.GugunResponse;
 import com.aptzip.dealMap.dto.response.SidoResponse;
@@ -29,7 +31,7 @@ public class DealMapController {
     }
 
     @GetMapping("/gugunList")
-    public ResponseEntity<List<GugunResponse>> getGugunList(@RequestParam GugunRequest sidoName){
+    public ResponseEntity<List<GugunResponse>> getGugunList(@RequestParam("sidoName") GugunRequest sidoName){
         List<GugunResponse> gugunList = dealMapService.getGugunNamesBySidoName(sidoName);
         return ResponseEntity.ok(gugunList);  // GugunResponse 리스트를 반환
     }
@@ -39,5 +41,12 @@ public class DealMapController {
         DongRequest dongRequest = new DongRequest(sidoName, gugunName);
         List<DongResponse> dongList = dealMapService.getDongCodesBySidoAndGugun(dongRequest);
         return ResponseEntity.ok(dongList);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<DealListResponse>> getAptList(@RequestParam("dongCode") String dongCode, @RequestParam(value = "aptNm", required = false) String aptNm){
+        DealListRequest dealListRequest = new DealListRequest(dongCode,aptNm);
+        List<DealListResponse> results = dealMapService.getDealsByAptNm(dealListRequest);
+        return ResponseEntity.ok(results);
     }
 }
