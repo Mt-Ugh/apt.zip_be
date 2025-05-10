@@ -1,6 +1,7 @@
 package com.aptzip.user.controller;
 
 import com.aptzip.user.dto.request.AddUserRequest;
+import com.aptzip.user.dto.request.UpdateUserRequest;
 import com.aptzip.user.dto.response.UserDetailResponse;
 import com.aptzip.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,10 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,13 +22,19 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<Void> signup(AddUserRequest request) {
-        userService.save(request);
+    public ResponseEntity<Void> signup(AddUserRequest addUserRequest) {
+        userService.save(addUserRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/detail/{userUuid}")
     public ResponseEntity<UserDetailResponse> userDetail(@PathVariable("userUuid") String userUuid) {
         return ResponseEntity.ok(userService.findByUuid(userUuid));
+    }
+
+    @PutMapping("/update/profile/{userUuid}")
+    public ResponseEntity<Void> updateUser(@PathVariable("userUuid") String userUuid, @RequestBody UpdateUserRequest updateUserRequest) {
+        userService.updateUser(userUuid, updateUserRequest);
+        return ResponseEntity.ok().build();
     }
 }

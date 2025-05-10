@@ -79,8 +79,10 @@ public class User implements UserDetails { // UserDetails를 상속받아 인증
         return password;
     }
 
-    public User update(String nickname) {
+    public User update(String nickname, String email, String password) {
         this.nickname = nickname;
+        this.email = email;
+        this.password = password;
 
         return this;
     }
