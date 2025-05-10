@@ -16,10 +16,10 @@ public class UserService {
     public String save(AddUserRequest dto) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        return userRepository.save(User.builder()
-                .email(dto.email())
-                .password(encoder.encode(dto.password()))
-                .build()).getUserUuid();
+        User user = dto.toEntity();
+        user.encodePassword(encoder);
+
+        return userRepository.save(user).getUserUuid();
     }
 
     public User findById(String userUuid) {

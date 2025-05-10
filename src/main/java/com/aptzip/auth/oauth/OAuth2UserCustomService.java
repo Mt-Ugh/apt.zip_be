@@ -10,6 +10,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -28,13 +29,17 @@ public class OAuth2UserCustomService extends DefaultOAuth2UserService {
     private User saveOrUpdate(OAuth2User oAuth2User) {
         Map<String, Object> attributes = oAuth2User.getAttributes();
         String email = (String) attributes.get("email");
-        String name = (String) attributes.get("name");
+
         User user = userRepository.findByEmail(email)
-                .map(entity -> entity.update(name))
-                .orElse(User.builder()
+                .orElseGet(() -> User.builder()
                         .email(email)
-                        .nickname(name)
+                        .name(attributes.getOrDefault("name", "소셜유저").toString())
+                        .nickname("user_" + UUID.randomUUID().toString().substring(0, 8))
+                        .password(UUID.randomUUID().toString()) // 비밀번호는 OAuth 로그인 사용자에겐 무의미하므로 난수
+                        .phoneNumber("010-0000-0000") // 기본값
+                        .profileUrl((String) attributes.getOrDefault("picture", ""))
                         .build());
+
         return userRepository.save(user);
     }
 }

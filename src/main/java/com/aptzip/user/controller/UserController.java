@@ -26,10 +26,4 @@ public class UserController {
         userService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
-    @GetMapping("/signout")
-    public ResponseEntity<Void> signout(HttpServletRequest request, HttpServletResponse response) {
-        new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
-        return ResponseEntity.ok().build();
-    }
 }

@@ -12,6 +12,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -46,18 +47,18 @@ public class User implements UserDetails { // UserDetails를 상속받아 인증
     @Column(name = "password", length = 100, nullable = false)
     private String password;
 
-    @Column(name = "phone_number", length = 15)
+    @Column(name = "phone_number", length = 15, nullable = false)
     private String phoneNumber;
 
     @Column(name = "profile_url", length = 200)
     private String profileUrl;
 
     @CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_at", insertable = false, updatable = false)
     private LocalDateTime updatedAt;
 
     @Column(name = "deleted_at")
@@ -82,5 +83,9 @@ public class User implements UserDetails { // UserDetails를 상속받아 인증
         this.nickname = nickname;
 
         return this;
+    }
+
+    public void encodePassword(BCryptPasswordEncoder encoder) {
+        this.password = encoder.encode(this.password);
     }
 }
