@@ -69,9 +69,4 @@ public class AuthController {
 
         return ResponseEntity.ok(tokenResponse);
     }
-
-    @GetMapping("/oauth-test/callback")
-    public ResponseEntity<String> callback(@RequestParam String accessToken) {
-        return ResponseEntity.ok("✅ 로그인 성공! AccessToken: " + accessToken);
-    }
 }
