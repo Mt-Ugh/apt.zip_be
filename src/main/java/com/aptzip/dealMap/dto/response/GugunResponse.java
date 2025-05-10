@@ -1,4 +1,5 @@
 package com.aptzip.dealMap.dto.response;
 
-public record GugunResponse(String gugunName) {
+public record GugunResponse(
+        String gugunName) {
 }
