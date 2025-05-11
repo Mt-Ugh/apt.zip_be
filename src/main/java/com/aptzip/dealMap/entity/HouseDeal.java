@@ -1,9 +1,11 @@
 package com.aptzip.dealMap.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "house_deal")
+@Data
 public class HouseDeal {
 
     @Id
@@ -26,8 +28,8 @@ public class HouseDeal {
     @Column(name = "deal_day")
     private Integer dealDay;
 
-    @Column(name = "exclu_use_ar", precision = 7)
-    private Double excluUseAr;
+    @Column(name = "exclu_use_ar")
+    private Float excluUseAr;
 
     @Column(name = "deal_amount", length = 10)
     private String dealAmount;
