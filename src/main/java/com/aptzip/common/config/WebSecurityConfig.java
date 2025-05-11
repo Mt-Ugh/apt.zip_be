@@ -76,6 +76,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/auth/**", "/oauth2/**",
+                                "/user/signup",
                                 "/review/list",
                                 "/review/detail",
                                 "/qna/list",
@@ -85,8 +86,7 @@ public class WebSecurityConfig {
                                 "/dealMap/**",
                                 "/amenitiesMap/**"
                         ).permitAll()
-                        .requestMatchers("/api/**").authenticated()
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/login")
