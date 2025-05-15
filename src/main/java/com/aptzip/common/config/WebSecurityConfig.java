@@ -82,7 +82,7 @@ public class WebSecurityConfig {
                                 "/qna/list",
                                 "/qna/detail",
                                 "/interestArea/regist",
-                                "/interestAres/fame",
+                                "/interestArea/fame",
                                 "/dealMap/**",
                                 "/amenitiesMap/**"
                         ).permitAll()

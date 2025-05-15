@@ -3,7 +3,10 @@ package com.aptzip.interestArea.entity;
 import com.aptzip.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.CreatedDate;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -15,19 +18,21 @@ import java.util.Date;
 @Builder
 public class InterestArea {
 
-    @EmbeddedId
-    private InterestAreaId interestAreaId; // 복합 키
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "ia_uuid", length = 36)
+    private String iaUuid;
 
     @ManyToOne
-    @MapsId("areaUuid") // 복합 키에서의 외래 키 매핑
     @JoinColumn(name = "area_uuid", referencedColumnName = "area_uuid", nullable = false)
     private Area areaUuid;
 
     @ManyToOne
-    @MapsId("userUuid") // 복합 키에서의 외래 키 매핑
     @JoinColumn(name = "user_uuid", referencedColumnName = "user_uuid", nullable = false)
     private User userUuid;
 
-    @Column(name = "created_at")
-    private Date createdAt;
+    @CreatedDate
+    @Column(name = "created_at", insertable = false, updatable = false)
+    private LocalDateTime createdAt;
 }
