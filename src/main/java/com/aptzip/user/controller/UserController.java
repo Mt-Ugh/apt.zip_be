@@ -35,9 +35,9 @@ public class UserController {
         return ResponseEntity.ok(userService.findByUuid(user.getUserUuid()));
     }
 
-    @PutMapping("/update/profile/{userUuid}")
-    public ResponseEntity<Void> updateUser(@PathVariable("userUuid") String userUuid, @RequestBody UpdateUserRequest updateUserRequest) {
-        userService.updateUser(userUuid, updateUserRequest);
+    @PutMapping("/update/profile")
+    public ResponseEntity<Void> updateUser(@AuthenticationPrincipal User user, @RequestBody UpdateUserRequest updateUserRequest) {
+        userService.updateUser(user.getUserUuid(), updateUserRequest);
         return ResponseEntity.ok().build();
     }
 
