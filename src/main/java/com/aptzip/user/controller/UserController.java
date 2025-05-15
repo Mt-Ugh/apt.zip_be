@@ -4,12 +4,14 @@ import com.aptzip.user.dto.request.AddUserRequest;
 import com.aptzip.user.dto.request.UpdateProfileUrlRequest;
 import com.aptzip.user.dto.request.UpdateUserRequest;
 import com.aptzip.user.dto.response.UserDetailResponse;
+import com.aptzip.user.entity.User;
 import com.aptzip.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -28,9 +30,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/detail/{userUuid}")
-    public ResponseEntity<UserDetailResponse> userDetail(@PathVariable("userUuid") String userUuid) {
-        return ResponseEntity.ok(userService.findByUuid(userUuid));
+    @GetMapping("/detail")
+    public ResponseEntity<UserDetailResponse> userDetail(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(userService.findByUuid(user.getUserUuid()));
     }
 
     @PutMapping("/update/profile/{userUuid}")
