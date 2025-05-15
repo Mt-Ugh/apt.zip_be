@@ -41,9 +41,9 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/update/profileUrl/{userUuid}")
-    public ResponseEntity<Void> updateProfileUrl(@PathVariable("userUuid") String userUuid, @RequestBody UpdateProfileUrlRequest updateProfileUrlRequest) {
-        userService.updateProfileUrl(userUuid, updateProfileUrlRequest);
+    @PutMapping("/update/profileUrl")
+    public ResponseEntity<Void> updateProfileUrl(@AuthenticationPrincipal User user, @RequestBody UpdateProfileUrlRequest updateProfileUrlRequest) {
+        userService.updateProfileUrl(user.getUserUuid(), updateProfileUrlRequest);
         return ResponseEntity.ok().build();
     }
 
