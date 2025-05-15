@@ -47,9 +47,9 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/delete/{userUuid}")
-    public ResponseEntity<Void> withdrawUser(@PathVariable String userUuid) {
-        userService.withdrawUser(userUuid);
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> withdrawUser(@AuthenticationPrincipal User user) {
+        userService.withdrawUser(user.getUserUuid());
         return ResponseEntity.ok().build();
     }
 }
