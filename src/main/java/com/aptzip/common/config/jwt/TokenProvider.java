@@ -64,7 +64,6 @@ public class TokenProvider {
         String uuid = claims.get("id", String.class);
         Set<SimpleGrantedAuthority> authorities = Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
 
-        // ✅ User 엔티티 직접 생성 (DB 조회 없이 최소 정보만)
         User user = User.builder()
                 .userUuid(uuid)
                 .email(email)
