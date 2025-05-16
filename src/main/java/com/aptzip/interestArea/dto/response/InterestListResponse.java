@@ -1,13 +1,15 @@
 package com.aptzip.interestArea.dto.response;
 
-import java.util.Date;
+import lombok.Builder;
 
+import java.time.LocalDateTime;
+
+@Builder
 public record InterestListResponse(
-        String userUuid,
         String areaName,
         String explain,
         String area_url,
         Double latitude,
         Double longitude,
-        Date created_at) {
+        LocalDateTime created_at) {
 }

@@ -26,11 +26,11 @@ public class InterestArea {
 
     @ManyToOne
     @JoinColumn(name = "area_uuid", referencedColumnName = "area_uuid", nullable = false)
-    private Area areaUuid;
+    private Area area;
 
     @ManyToOne
     @JoinColumn(name = "user_uuid", referencedColumnName = "user_uuid", nullable = false)
-    private User userUuid;
+    private User user;
 
     @CreatedDate
     @Column(name = "created_at", insertable = false, updatable = false)
