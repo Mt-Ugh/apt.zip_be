@@ -1,4 +1,4 @@
-package com.aptzip.common.config;
+package com.aptzip.common.config.cors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

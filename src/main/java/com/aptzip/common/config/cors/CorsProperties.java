@@ -1,4 +1,4 @@
-package com.aptzip.common.config;
+package com.aptzip.common.config.cors;
 
 import lombok.Getter;
 import lombok.Setter;

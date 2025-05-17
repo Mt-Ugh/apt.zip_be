@@ -1,4 +1,4 @@
-package com.aptzip.common.config;
+package com.aptzip.common.config.redis;
 
 import lombok.Getter;
 import lombok.Setter;
