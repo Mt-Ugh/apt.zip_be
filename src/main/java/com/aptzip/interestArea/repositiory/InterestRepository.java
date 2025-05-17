@@ -26,7 +26,7 @@ public interface InterestRepository extends JpaRepository<InterestArea, String> 
             "ORDER BY COUNT(ia.area) DESC")
     List<Object[]> findMostPopularAreasUser(String userUuid);
 
-    //인기 지역 (비회원)
+    // 인기 지역 (비회원)
     @Query("SELECT " +
             "  a.areaUuid, " +
             "  a.name, " +
@@ -42,7 +42,6 @@ public interface InterestRepository extends JpaRepository<InterestArea, String> 
     @Modifying
     @Query("delete from InterestArea ia where ia.user.userUuid = :userUuid and ia.area.areaUuid = :areaUuid")
     void deleteByUserUuidAndAreaUuid(String userUuid, String areaUuid);
-
 
     List<InterestArea> findByUser(User user);
 }

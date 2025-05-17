@@ -31,7 +31,6 @@ public class InterestAreaController {
     @PostMapping("/regist")
     public ResponseEntity<Void> createInterestArea(@AuthenticationPrincipal User user, @RequestBody AddInterestAreaRequest addInterestAreaRequest) {
         interestAreaService.save(user, addInterestAreaRequest);
-
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -39,11 +38,8 @@ public class InterestAreaController {
     public ResponseEntity<List<FameListResponse>> getInterestArea(@AuthenticationPrincipal User user){
         String userUuid = user != null ? user.getUserUuid() : null;
         List<FameListResponse> result = interestAreaService.getFame(userUuid);
-
         return ResponseEntity.ok(result);
     }
-
-
     @DeleteMapping("/delete/{areaUuid}")
     public ResponseEntity<Void> disableArea(@AuthenticationPrincipal User user, @PathVariable String areaUuid){
         interestAreaService.disableArea(user.getUserUuid(),areaUuid);

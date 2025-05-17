@@ -7,8 +7,7 @@ import com.aptzip.user.entity.User;
 import java.util.Date;
 
 public record AddInterestAreaRequest(
-        String areaUuid
-    ) {
+        String areaUuid) {
 
     public InterestArea toEntity(User user, Area area) {
         return InterestArea.builder()
