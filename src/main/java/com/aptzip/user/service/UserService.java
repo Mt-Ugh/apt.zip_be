@@ -18,10 +18,10 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public String save(AddUserRequest dto) {
+    public String save(AddUserRequest addUserRequest) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        User user = dto.toEntity();
+        User user = addUserRequest.toEntity();
         user.encodePassword(encoder);
 
         return userRepository.save(user).getUserUuid();
