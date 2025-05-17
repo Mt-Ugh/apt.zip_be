@@ -9,7 +9,6 @@ public record QnARegistRequest(
         String title,
         String content) {
 
-
     public QnA toEntity(User user) {
         return QnA.builder()
                 .user(user)

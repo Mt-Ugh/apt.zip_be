@@ -24,8 +24,8 @@ public class Answer {
     @Column(name="qna_ans_uuid", length = 36)
     private String qnaAnsUuid;
 
-    @Column(name="content")
-    private String content;
+    @Column(name="ans_content")
+    private String ansContent;
 
     @CreatedDate
     @Column(name = "created_at", insertable = false, updatable = false)

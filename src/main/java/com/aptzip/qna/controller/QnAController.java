@@ -1,5 +1,6 @@
 package com.aptzip.qna.controller;
 
+import com.aptzip.qna.dto.request.AnswerRequest;
 import com.aptzip.qna.dto.request.QnARegistRequest;
 import com.aptzip.qna.dto.response.DetailResponse;
 import com.aptzip.qna.dto.response.DetailWrapperResponse;
@@ -36,12 +37,36 @@ public class QnAController {
     }
 
     @GetMapping("/detail/{qnaUuid}")
-    public ResponseEntity<DetailWrapperResponse> getQnADetail(@PathVariable("qnaUuid") String qnaUuid){
-        DetailResponse detailResponse = qnAService.qnaDetail(qnaUuid);
-        List<QnAAnswerResponse> qnAAnswerResponses = qnAService.qnaAnswerList(qnaUuid);
+    public ResponseEntity<DetailWrapperResponse> getQnADetail(@AuthenticationPrincipal User user,@PathVariable("qnaUuid") String qnaUuid){
+        DetailResponse detailResponse = qnAService.qnaDetail(user,qnaUuid);
+        List<QnAAnswerResponse> qnAAnswerResponses = qnAService.qnaAnswerList(user, qnaUuid);
 
         DetailWrapperResponse wrapperResponse = new DetailWrapperResponse(detailResponse, qnAAnswerResponses);
 
         return ResponseEntity.ok(wrapperResponse);
+    }
+
+    @DeleteMapping("/delete/{qnaUuid}")
+    public ResponseEntity<Void> deleteQnA(@AuthenticationPrincipal User user, @PathVariable("qnaUuid") String qnaUuid){
+        qnAService.deleteQnA(user,qnaUuid);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/answerRegist/{qnaUuid}")
+    public ResponseEntity<Void> createAnswer(@AuthenticationPrincipal User user, @PathVariable("qnaUuid") String qnaUuid, @RequestBody AnswerRequest answerRequest){
+        qnAService.answerSave(user,qnaUuid,answerRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("/answerDelete/{qnaAnsUuid}")
+    public ResponseEntity<Void> deleteAnswer(@PathVariable("qnaAnsUuid") String qnaAnsUuid){
+        qnAService.deleteAnswer(qnaAnsUuid);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/userList")
+    public ResponseEntity<List<QnAListResponse>> getUserQnAList(@AuthenticationPrincipal User user){
+        List<QnAListResponse> result = qnAService.getUserQnAList(user);
+        return ResponseEntity.ok(result);
     }
 }

@@ -12,6 +12,6 @@ public record DetailResponse(
         String content,
         String profileUrl,
         String nickname,
-        LocalDateTime createdAt
-        ) {
+        LocalDateTime createdAt,
+        Integer isMineQnA) {
 }
