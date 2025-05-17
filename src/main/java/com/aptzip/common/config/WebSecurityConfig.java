@@ -8,16 +8,19 @@ import com.aptzip.common.config.jwt.JwtProperties;
 import com.aptzip.common.config.jwt.TokenProvider;
 import com.aptzip.common.filter.TokenAuthenticationFilter;
 import com.aptzip.user.repository.UserRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
@@ -66,6 +69,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
@@ -89,7 +93,6 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/login")
                         .authorizationEndpoint(endpoint -> endpoint
                                 .authorizationRequestRepository(authorizationRequestRepository())
                         )
@@ -99,10 +102,15 @@ public class WebSecurityConfig {
                         .successHandler(oAuth2SuccessHandler())
                 )
                 .exceptionHandling(ex -> ex
-                        .defaultAuthenticationEntryPointFor(
-                                new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
-                                new AntPathRequestMatcher("/api/**")
-                        )
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            if (authException instanceof AuthenticationException) {
+                                // 인증 실패만 401
+                                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "인증이 필요합니다.");
+                            } else {
+                                // 그 외는 ControllerAdvice로
+                                throw authException;
+                            }
+                        })
                 )
                 .addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
