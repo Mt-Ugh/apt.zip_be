@@ -11,14 +11,12 @@ import com.aptzip.qna.entity.QnA;
 import com.aptzip.qna.repository.AnswerRepository;
 import com.aptzip.qna.repository.QnARepository;
 import com.aptzip.user.entity.User;
-import com.aptzip.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -27,7 +25,6 @@ public class QnAService {
 
     private final QnARepository qnARepository;
     private final AnswerRepository answerRepository;
-    private final UserRepository userRepository;
 
     @Transactional
     public String qnaSave(User user, QnARegistRequest qnARegistRequest) {

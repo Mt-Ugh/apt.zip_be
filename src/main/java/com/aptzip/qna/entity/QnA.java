@@ -1,6 +1,5 @@
 package com.aptzip.qna.entity;
 
-
 import com.aptzip.qna.constant.Category;
 import com.aptzip.user.entity.User;
 import jakarta.persistence.*;

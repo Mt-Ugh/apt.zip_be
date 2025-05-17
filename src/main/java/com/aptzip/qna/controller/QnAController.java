@@ -42,7 +42,6 @@ public class QnAController {
         List<QnAAnswerResponse> qnAAnswerResponses = qnAService.qnaAnswerList(user, qnaUuid);
 
         DetailWrapperResponse wrapperResponse = new DetailWrapperResponse(detailResponse, qnAAnswerResponses);
-
         return ResponseEntity.ok(wrapperResponse);
     }
 

@@ -1,7 +1,6 @@
 package com.aptzip.qna.dto.response;
 
 import com.aptzip.qna.constant.Category;
-import com.aptzip.qna.entity.QnA;
 
 import java.time.LocalDateTime;
 
