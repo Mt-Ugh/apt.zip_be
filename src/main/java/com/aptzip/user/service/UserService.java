@@ -27,18 +27,8 @@ public class UserService {
         return userRepository.save(user).getUserUuid();
     }
 
-    public User findById(String userUuid) {
-        return userRepository.findById(userUuid)
-                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
-    }
-
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
-    }
-
     public UserDetailResponse findByUuid(String userUuid) {
-        User user = userRepository.findByUserUuid(userUuid)
+        User user = userRepository.findById(userUuid)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
 
         return new UserDetailResponse(
@@ -51,7 +41,7 @@ public class UserService {
 
     @Transactional
     public void updateUser(String userUuid, UpdateUserRequest updateUserRequest) {
-        User user = userRepository.findByUserUuid(userUuid)
+        User user = userRepository.findById(userUuid)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
 
         String encodedPassword = null;
@@ -68,7 +58,7 @@ public class UserService {
 
     @Transactional
     public void updateProfileUrl(String userUuid, UpdateProfileUrlRequest updateProfileUrlRequest) {
-        User user = userRepository.findByUserUuid(userUuid)
+        User user = userRepository.findById(userUuid)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
 
         user.updateProfileUrl(updateProfileUrlRequest.profileUrl());
@@ -76,7 +66,7 @@ public class UserService {
 
     @Transactional
     public void withdrawUser(String userUuid) {
-        User user = userRepository.findByUserUuid(userUuid)
+        User user = userRepository.findById(userUuid)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
 
         userRepository.delete(user);
