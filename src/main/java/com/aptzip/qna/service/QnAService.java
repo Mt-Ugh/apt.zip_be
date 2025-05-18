@@ -6,6 +6,7 @@ import com.aptzip.qna.dto.request.QnARegistRequest;
 import com.aptzip.qna.dto.response.DetailResponse;
 import com.aptzip.qna.dto.response.QnAAnswerResponse;
 import com.aptzip.qna.dto.response.QnAListResponse;
+import com.aptzip.qna.dto.response.RegistResponse;
 import com.aptzip.qna.entity.Answer;
 import com.aptzip.qna.entity.QnA;
 import com.aptzip.qna.repository.AnswerRepository;
@@ -27,9 +28,10 @@ public class QnAService {
     private final AnswerRepository answerRepository;
 
     @Transactional
-    public String qnaSave(User user, QnARegistRequest qnARegistRequest) {
+    public RegistResponse qnaSave(User user, QnARegistRequest qnARegistRequest) {
         QnA qna = qnARegistRequest.toEntity(user);
-        return qnARepository.save(qna).getQnaUuid();
+        String qnaUuid =  qnARepository.save(qna).getQnaUuid();
+        return new RegistResponse(qnaUuid);
     }
 
     public List<QnAListResponse> getQnAList() {

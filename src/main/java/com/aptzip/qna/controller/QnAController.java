@@ -22,9 +22,9 @@ public class QnAController {
     private final QnAService qnAService;
 
     @PostMapping("/regist")
-    public ResponseEntity<Void> createQnA(@AuthenticationPrincipal User user, @RequestBody QnARegistRequest qnARegistRequest){
-        qnAService.qnaSave(user, qnARegistRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<RegistResponse> createQnA(@AuthenticationPrincipal User user, @RequestBody QnARegistRequest qnARegistRequest){
+        RegistResponse result = qnAService.qnaSave(user, qnARegistRequest);
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/list")
