@@ -25,5 +25,4 @@ public class AmenitiesMapController {
         List<AmenitiesListResponse> results = amenitiesMapService.getAmenitiesMapList(amenitiesListRequest);
         return ResponseEntity.ok(results);
     }
-
 }
