@@ -33,7 +33,7 @@ public class QnAController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/detail/{qnaUuid}")
+    @GetMapping(value = {"/detail/{qnaUuid}","/detail"})
     public ResponseEntity<DetailWrapperResponse> getQnADetail(@AuthenticationPrincipal User user, @PathVariable("qnaUuid") String qnaUuid){
         DetailResponse detailResponse = qnAService.qnaDetail(user,qnaUuid);
         List<QnAAnswerResponse> qnAAnswerResponses = qnAService.qnaAnswerList(user, qnaUuid);

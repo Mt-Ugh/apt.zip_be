@@ -35,7 +35,7 @@ public class QnAService {
     }
 
     public List<QnAListResponse> getQnAList() {
-        List<QnA> results = qnARepository.findAll();
+        List<QnA> results = qnARepository.findAllByOrderByCreatedAtDesc();
 
         return results.stream()
                 .map(result -> new QnAListResponse(
@@ -50,8 +50,13 @@ public class QnAService {
     public DetailResponse qnaDetail(User user, String qnaUuid) {
         QnA qnA =  qnARepository.findById(qnaUuid)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected qna"));
+        Integer isMine;
 
-        Integer isMine = qnA.getUser().getUserUuid().equals(user.getUserUuid()) ? 1: 0;
+        if (user == null) {
+            isMine = 0;
+        } else {
+            isMine = qnA.getUser().getUserUuid().equals(user.getUserUuid()) ? 1 : 0;
+        }
 
         return DetailResponse
                 .builder()
@@ -68,7 +73,7 @@ public class QnAService {
     public List<QnAAnswerResponse> qnaAnswerList(User user, String qnaUuid) {
         QnA qnA = qnARepository.findById(qnaUuid)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected qna"));
-        List<Answer> answers = answerRepository.findByQna(qnA);
+        List<Answer> answers = answerRepository.findByQnaOrderByCreatedAtDesc(qnA);
 
         return answers.stream()
                 .map(result -> new QnAAnswerResponse(
@@ -77,7 +82,7 @@ public class QnAService {
                         result.getUser().getProfileUrl(),
                         result.getUser().getNickname(),
                         result.getCreatedAt(),
-                        result.getUser().getUserUuid().equals(user.getUserUuid()) ? 1 : 0
+                        user != null && result.getUser().getUserUuid().equals(user.getUserUuid()) ? 1 : 0
                 ))
                 .collect(Collectors.toList());
     }

@@ -13,4 +13,6 @@ public interface AnswerRepository extends JpaRepository<Answer, String> {
     List<Answer> findByUser(User user);
 
     int deleteByQnaAnsUuid(String qnaAnsUuid);
+
+    List<Answer> findByQnaOrderByCreatedAtDesc(QnA qna);
 }

@@ -11,4 +11,6 @@ public interface QnARepository extends JpaRepository<QnA, String> {
     int deleteByQnaUuidAndUser(String qnaUuid, User user);
 
     List<QnA> findByUser(User user);
+
+    List<QnA> findAllByOrderByCreatedAtDesc();
 }
