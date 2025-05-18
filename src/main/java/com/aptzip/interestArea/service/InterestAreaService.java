@@ -31,7 +31,7 @@ public class InterestAreaService {
                 .map(ia -> InterestListResponse.builder()
                         .areaName(ia.getArea().getName())
                         .explain(ia.getArea().getExplain())
-                        .area_url(ia.getArea().getAreaUrl())
+                        .areaUrl(ia.getArea().getAreaUrl())
                         .latitude(ia.getArea().getLatitude())
                         .longitude(ia.getArea().getLongitude())
                         .createdAt(ia.getCreatedAt())
@@ -45,7 +45,7 @@ public class InterestAreaService {
         Area area = areaRepository.findById(addInterestAreaRequest.areaUuid())
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected area"));
 
-        InterestArea interestArea = addInterestAreaRequest.toEntity(user,area);
+        InterestArea interestArea = addInterestAreaRequest.toEntity(user, area);
 
         boolean exists = interestRepository.existsByUserAndArea(interestArea.getUser(),interestArea.getArea());
         if (exists) {
@@ -84,6 +84,6 @@ public class InterestAreaService {
 
     @Transactional
     public void disableArea(String userUuid, String areaUuid){
-        interestRepository.deleteByUserUuidAndAreaUuid(userUuid,areaUuid);
+        interestRepository.deleteByUserUuidAndAreaUuid(userUuid, areaUuid);
     }
 }

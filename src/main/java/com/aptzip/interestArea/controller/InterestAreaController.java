@@ -39,9 +39,10 @@ public class InterestAreaController {
         List<FameListResponse> result = interestAreaService.getFame(userUuid);
         return ResponseEntity.ok(result);
     }
+
     @DeleteMapping("/delete/{areaUuid}")
     public ResponseEntity<Void> disableArea(@AuthenticationPrincipal User user, @PathVariable("areaUuid") String areaUuid){
-        interestAreaService.disableArea(user.getUserUuid(),areaUuid);
+        interestAreaService.disableArea(user.getUserUuid(), areaUuid);
         return ResponseEntity.ok().build();
     }
 }
