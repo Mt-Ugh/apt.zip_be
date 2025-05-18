@@ -24,7 +24,6 @@ public class InterestAreaService {
     private final UserRepository userRepository;
     private final AreaRepository areaRepository;
 
-
     public List<InterestListResponse> getInterestAreaByUser(User user) {
         List<InterestArea> interestAreas = interestRepository.findByUser(user);
 
@@ -35,12 +34,11 @@ public class InterestAreaService {
                         .area_url(ia.getArea().getAreaUrl())
                         .latitude(ia.getArea().getLatitude())
                         .longitude(ia.getArea().getLongitude())
-                        .created_at(ia.getCreatedAt())
+                        .createdAt(ia.getCreatedAt())
                         .build()
                 )
                 .toList();
     }
-
 
     @Transactional
     public String save(User user, AddInterestAreaRequest addInterestAreaRequest) {

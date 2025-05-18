@@ -5,7 +5,6 @@ import com.aptzip.dealMap.dto.request.DetailRequest;
 import com.aptzip.dealMap.dto.request.DongRequest;
 import com.aptzip.dealMap.dto.request.GugunRequest;
 import com.aptzip.dealMap.dto.response.*;
-import com.aptzip.dealMap.repository.DetailDealRepository;
 import com.aptzip.dealMap.service.DealMapService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +54,6 @@ public class DealMapController {
         List<DetailListResponse> detailListResponse = dealMapService.getDealDetailByAptSeq(aptSeq);
 
         DetailWrapperResponse wrapperResponse = new DetailWrapperResponse(detailResponse, detailListResponse);
-
         return ResponseEntity.ok(wrapperResponse);
     }
 }

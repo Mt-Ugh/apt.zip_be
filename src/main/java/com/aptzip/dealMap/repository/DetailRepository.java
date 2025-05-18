@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface DetailRepository extends JpaRepository<HouseInfo, Integer> {
 
-    // 주택 상세정보 조회
+    // 주택 상세 정보 조회
     @Query("SELECT " +
             "hi.aptSeq, hi.aptNm, dc.sidoName, " +
             "dc.gugunName, dc.dongName, hi.jibun, "+
@@ -19,6 +19,4 @@ public interface DetailRepository extends JpaRepository<HouseInfo, Integer> {
             "WHERE hi.aptSeq = :aptSeq " +
             "GROUP BY hi.aptSeq, hi.aptNm, dc.sidoName, dc.gugunName, dc.dongName, hi.jibun, hi.buildYear")
     List<Object[]> findDetailByAptSeq(String aptSeq);
-
-
 }

@@ -1,6 +1,5 @@
 package com.aptzip.dealMap.repository;
 
-import com.aptzip.dealMap.dto.response.DealListResponse;
 import com.aptzip.dealMap.entity.HouseDeal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,7 +23,6 @@ public interface DealHouseRepository extends JpaRepository<HouseDeal, Integer> {
             "ORDER BY MAX(hd.dealYear) DESC, MAX(hd.dealMonth) DESC, MAX(hd.dealDay) DESC")
     List<Object[]> findDealsByDongCode(String dongCode);
 
-
     // 법정동 코드와 아파트 이름으로 거래 정보 조회
     @Query("SELECT " +
             "hi.aptSeq, hi.aptNm, dc.sidoName, dc.gugunName, dc.dongName, hi.jibun, " +
@@ -38,5 +36,4 @@ public interface DealHouseRepository extends JpaRepository<HouseDeal, Integer> {
             "GROUP BY hi.aptSeq, hi.aptNm, dc.sidoName, dc.gugunName, dc.dongName, hi.jibun, hi.latitude, hi.longitude " +
             "ORDER BY MAX(hd.dealYear) DESC, MAX(hd.dealMonth) DESC, MAX(hd.dealDay) DESC")
     List<Object[]> findDealsByDongCodeAptNm(String dongCode, String aptNm);
-
 }

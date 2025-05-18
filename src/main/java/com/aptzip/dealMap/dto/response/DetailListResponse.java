@@ -1,7 +1,5 @@
 package com.aptzip.dealMap.dto.response;
 
-import java.math.BigDecimal;
-
 public record DetailListResponse(
         Integer no,
         String aptDong,

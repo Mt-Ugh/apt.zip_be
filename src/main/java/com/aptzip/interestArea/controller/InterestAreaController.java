@@ -21,7 +21,6 @@ public class InterestAreaController {
 
     private final InterestAreaService interestAreaService;
 
-
     @GetMapping("/list")
     public ResponseEntity<List<InterestListResponse>> getUserInterestArea(@AuthenticationPrincipal User user){
         List<InterestListResponse> results = interestAreaService.getInterestAreaByUser(user);
@@ -41,7 +40,7 @@ public class InterestAreaController {
         return ResponseEntity.ok(result);
     }
     @DeleteMapping("/delete/{areaUuid}")
-    public ResponseEntity<Void> disableArea(@AuthenticationPrincipal User user, @PathVariable String areaUuid){
+    public ResponseEntity<Void> disableArea(@AuthenticationPrincipal User user, @PathVariable("areaUuid") String areaUuid){
         interestAreaService.disableArea(user.getUserUuid(),areaUuid);
         return ResponseEntity.ok().build();
     }

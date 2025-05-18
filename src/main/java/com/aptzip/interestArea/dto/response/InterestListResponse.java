@@ -11,5 +11,5 @@ public record InterestListResponse(
         String area_url,
         Double latitude,
         Double longitude,
-        LocalDateTime created_at) {
+        LocalDateTime createdAt) {
 }
