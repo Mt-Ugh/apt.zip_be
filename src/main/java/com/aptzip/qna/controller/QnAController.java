@@ -2,10 +2,7 @@ package com.aptzip.qna.controller;
 
 import com.aptzip.qna.dto.request.AnswerRequest;
 import com.aptzip.qna.dto.request.QnARegistRequest;
-import com.aptzip.qna.dto.response.DetailResponse;
-import com.aptzip.qna.dto.response.DetailWrapperResponse;
-import com.aptzip.qna.dto.response.QnAAnswerResponse;
-import com.aptzip.qna.dto.response.QnAListResponse;
+import com.aptzip.qna.dto.response.*;
 import com.aptzip.qna.service.QnAService;
 import com.aptzip.user.entity.User;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +34,7 @@ public class QnAController {
     }
 
     @GetMapping("/detail/{qnaUuid}")
-    public ResponseEntity<DetailWrapperResponse> getQnADetail(@AuthenticationPrincipal User user,@PathVariable("qnaUuid") String qnaUuid){
+    public ResponseEntity<DetailWrapperResponse> getQnADetail(@AuthenticationPrincipal User user, @PathVariable("qnaUuid") String qnaUuid){
         DetailResponse detailResponse = qnAService.qnaDetail(user,qnaUuid);
         List<QnAAnswerResponse> qnAAnswerResponses = qnAService.qnaAnswerList(user, qnaUuid);
 
@@ -47,13 +44,13 @@ public class QnAController {
 
     @DeleteMapping("/delete/{qnaUuid}")
     public ResponseEntity<Void> deleteQnA(@AuthenticationPrincipal User user, @PathVariable("qnaUuid") String qnaUuid){
-        qnAService.deleteQnA(user,qnaUuid);
+        qnAService.deleteQnA(user, qnaUuid);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/answerRegist/{qnaUuid}")
     public ResponseEntity<Void> createAnswer(@AuthenticationPrincipal User user, @PathVariable("qnaUuid") String qnaUuid, @RequestBody AnswerRequest answerRequest){
-        qnAService.answerSave(user,qnaUuid,answerRequest);
+        qnAService.answerSave(user, qnaUuid, answerRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

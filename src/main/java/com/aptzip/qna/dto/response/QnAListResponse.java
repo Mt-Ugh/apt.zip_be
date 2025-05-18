@@ -8,5 +8,5 @@ public record QnAListResponse(
         String qnaUuid,
         Category category,
         String title,
-        LocalDateTime createdAt ) {
+        LocalDateTime createdAt) {
 }

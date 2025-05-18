@@ -4,5 +4,5 @@ import java.util.List;
 
 public record DetailWrapperResponse(
         DetailResponse detailResponse,
-        List<QnAAnswerResponse>  qnAAnswerResponse) {
+        List<QnAAnswerResponse> qnAAnswerResponse) {
 }

@@ -45,7 +45,7 @@ public class QnAService {
                 .collect(Collectors.toList());
     }
 
-    public DetailResponse qnaDetail(User user,String qnaUuid) {
+    public DetailResponse qnaDetail(User user, String qnaUuid) {
         QnA qnA =  qnARepository.findById(qnaUuid)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected qna"));
 
@@ -94,7 +94,7 @@ public class QnAService {
     }
 
     @Transactional
-    public String answerSave(User user, String qnaUuid , AnswerRequest answerRequest) {
+    public String answerSave(User user, String qnaUuid, AnswerRequest answerRequest) {
         QnA qnA = qnARepository.findById(qnaUuid)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected qna"));
 

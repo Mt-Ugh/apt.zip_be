@@ -11,5 +11,5 @@ public record QnAAnswerResponse(
         String profileUrl,
         String nickname,
         LocalDateTime createdAt,
-        Integer is_mine_ans) {
+        Integer isMineAns) {
 }
