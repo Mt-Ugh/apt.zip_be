@@ -9,7 +9,6 @@ import jakarta.persistence.Table;
 @Table(name="dongcode")
 public class DongCode {
 
-
     @Id
     @Column(name="dong_code", length = 10)
     private String dongCode;
