@@ -78,7 +78,7 @@ public class WebSecurityConfig {
                                 "/review/list",
                                 "/review/detail",
                                 "/qna/list",
-                                "/qna/detail",
+                                "/qna/detail/**",
                                 "/interestArea/regist",
                                 "/interestArea/fame",
                                 "/dealMap/**",
