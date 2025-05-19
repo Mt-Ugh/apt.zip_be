@@ -43,7 +43,6 @@ public class Answer {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name="qna_uuid" ,referencedColumnName = "qna_uuid", nullable = false)
+    @JoinColumn(name="qna_uuid", referencedColumnName = "qna_uuid", nullable = false)
     private QnA qna;
-
 }
