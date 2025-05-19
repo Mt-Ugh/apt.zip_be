@@ -19,7 +19,7 @@ public interface InterestRepository extends JpaRepository<InterestArea, String> 
             "  CASE WHEN ia_user.user.userUuid IS NOT NULL THEN 1 ELSE 0 END, " +
             "  COUNT(ia.area.areaUuid) " +
             "FROM Area a " +
-            "LEFT JOIN InterestArea ia ON ia.area = a " +
+            "LEFT JOIN InterestArea ia ON ia.area.areaUuid = a.areaUuid " +
             "LEFT JOIN InterestArea ia_user ON ia_user.area = a AND ia_user.user.userUuid = :userUuid " +
             "GROUP BY a.areaUuid, a.name, a.areaUrl, ia_user.user " +
             "ORDER BY COUNT(ia.area) DESC")
@@ -31,7 +31,7 @@ public interface InterestRepository extends JpaRepository<InterestArea, String> 
             "  a.name, " +
             "  a.areaUrl " +
             "FROM Area a " +
-            "LEFT JOIN InterestArea ia ON ia.area.areaUuid = a.areaUrl " +
+            "LEFT JOIN InterestArea ia ON ia.area.areaUuid = a.areaUuid " +
             "GROUP BY a.areaUuid, a.name, a.areaUrl " +
             "ORDER BY COUNT(ia) DESC")
     List<Object[]> findMostPopularAreas();
