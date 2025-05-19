@@ -82,7 +82,8 @@ public class WebSecurityConfig {
                                 "/interestArea/regist",
                                 "/interestArea/fame",
                                 "/dealMap/**",
-                                "/amenitiesMap/**"
+                                "/amenitiesMap/**",
+                                "/news/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
