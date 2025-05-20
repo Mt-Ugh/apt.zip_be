@@ -34,12 +34,9 @@ public class QnAController {
     }
 
     @GetMapping("/detail/{qnaUuid}")
-    public ResponseEntity<DetailWrapperResponse> getQnADetail(@AuthenticationPrincipal User user, @PathVariable("qnaUuid") String qnaUuid){
+    public ResponseEntity<DetailResponse> getQnADetail(@AuthenticationPrincipal User user, @PathVariable("qnaUuid") String qnaUuid){
         DetailResponse detailResponse = qnAService.qnaDetail(user, qnaUuid);
-        List<QnAAnswerResponse> qnAAnswerResponses = qnAService.qnaAnswerList(user, qnaUuid);
-
-        DetailWrapperResponse wrapperResponse = new DetailWrapperResponse(detailResponse, qnAAnswerResponses);
-        return ResponseEntity.ok(wrapperResponse);
+        return ResponseEntity.ok(detailResponse);
     }
 
     @DeleteMapping("/delete/{qnaUuid}")

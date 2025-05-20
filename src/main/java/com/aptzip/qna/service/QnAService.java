@@ -50,6 +50,7 @@ public class QnAService {
     public DetailResponse qnaDetail(User user, String qnaUuid) {
         QnA qnA =  qnARepository.findById(qnaUuid)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected qna"));
+        List<QnAAnswerResponse> AnswerList = qnaAnswerList(user,qnaUuid);
         Integer isMine;
 
         if (user == null) {
@@ -67,6 +68,7 @@ public class QnAService {
                 .profileUrl(qnA.getUser().getProfileUrl())
                 .nickname(qnA.getUser().getNickname())
                 .isMineQnA(isMine)
+                .qnaAnswerResponse(AnswerList)
                 .build();
     }
 
