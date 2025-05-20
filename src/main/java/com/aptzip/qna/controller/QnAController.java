@@ -24,7 +24,7 @@ public class QnAController {
     @PostMapping("/regist")
     public ResponseEntity<RegistResponse> createQnA(@AuthenticationPrincipal User user, @RequestBody QnARegistRequest qnARegistRequest){
         RegistResponse result = qnAService.qnaSave(user, qnARegistRequest);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
     @GetMapping("/list")
