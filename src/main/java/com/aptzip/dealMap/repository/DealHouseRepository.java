@@ -31,7 +31,7 @@ public interface DealHouseRepository extends JpaRepository<HouseDeal, Integer> {
             "FROM HouseDeal hd " +
             "JOIN HouseInfo hi ON hi.aptSeq = hd.houseInfo.aptSeq " +
             "JOIN DongCode dc ON hi.dongCode.dongCode = dc.dongCode " +
-            "WHERE hi.aptNm = :aptNm " +
+            "WHERE hi.aptNm like %:aptNm% " +
             "AND dc.dongCode = :dongCode " +
             "GROUP BY hi.aptSeq, hi.aptNm, dc.sidoName, dc.gugunName, dc.dongName, hi.jibun, hi.latitude, hi.longitude " +
             "ORDER BY MAX(hd.dealYear) DESC, MAX(hd.dealMonth) DESC, MAX(hd.dealDay) DESC")
