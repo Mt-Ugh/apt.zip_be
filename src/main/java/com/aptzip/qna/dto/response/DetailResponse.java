@@ -4,6 +4,7 @@ import com.aptzip.qna.constant.Category;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 public record DetailResponse(
@@ -13,5 +14,6 @@ public record DetailResponse(
         String profileUrl,
         String nickname,
         LocalDateTime createdAt,
-        Integer isMineQnA) {
+        Integer isMineQnA,
+        List<QnAAnswerResponse> qnaAnswerResponse) {
 }
