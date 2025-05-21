@@ -1,8 +1,6 @@
-package com.aptzip.dealMap.dto.response;
+package com.aptzip.dealMap.dto.query;
 
-import java.util.List;
-
-public record DetailResponse(
+public record DetailResult(
         String aptSeq,
         String aptNm,
         String sidoName,
@@ -12,6 +10,5 @@ public record DetailResponse(
         Integer maxAmount,
         Integer minAmount,
         Long totalDeal,
-        Integer buildYear,
-        List<DetailDealListResponse> dealList){
+        Integer buildYear) {
 }

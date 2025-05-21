@@ -12,5 +12,5 @@ public record DealListResponse(
         Integer dealMonth,
         Integer dealDay,
         Double latitude,
-        Double longitude
-) {}
+        Double longitude) {
+}
