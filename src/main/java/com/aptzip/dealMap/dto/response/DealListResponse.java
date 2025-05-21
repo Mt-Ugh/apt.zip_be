@@ -7,7 +7,7 @@ public record DealListResponse(
         String gugunName,
         String dongName,
         String jibun,
-        String dealAmount,
+        Integer dealAmount,
         Integer dealYear,
         Integer dealMonth,
         Integer dealDay,

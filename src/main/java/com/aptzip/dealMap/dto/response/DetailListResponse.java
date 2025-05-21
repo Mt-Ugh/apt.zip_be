@@ -8,5 +8,5 @@ public record DetailListResponse(
         Integer dealMonth,
         Integer dealDay,
         Float excluUseAr,
-        String dealAmount){
+        Integer dealAmount){
 }

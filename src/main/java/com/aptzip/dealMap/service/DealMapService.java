@@ -68,7 +68,7 @@ public class DealMapService {
                         (String) result[3],  // gugunName
                         (String) result[4],  // dongName
                         (String) result[5],  // jibun
-                        (String) result[6],  // dealAmount
+                        (Integer) result[6],  // dealAmount
                         (Integer) result[7], // dealYear
                         (Integer) result[8], // dealMonth
                         (Integer) result[9], // dealDay

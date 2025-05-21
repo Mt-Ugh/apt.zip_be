@@ -31,8 +31,8 @@ public class HouseDeal {
     @Column(name = "exclu_use_ar")
     private Float excluUseAr;
 
-    @Column(name = "deal_amount", length = 10)
-    private String dealAmount;
+    @Column(name = "deal_amount")
+    private Integer dealAmount;
 
     @ManyToOne
     @JoinColumn(name = "apt_seq", referencedColumnName = "apt_seq", insertable = false, updatable = false)
