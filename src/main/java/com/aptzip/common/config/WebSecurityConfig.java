@@ -75,8 +75,7 @@ public class WebSecurityConfig {
                         .requestMatchers(
                                 "/auth/**", "/oauth2/**",
                                 "/user/signup",
-                                "/review/list",
-                                "/review/detail",
+                                "/review/list/dong/**",
                                 "/qna/list",
                                 "/qna/detail/**",
                                 "/interestArea/regist",
