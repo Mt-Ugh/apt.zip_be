@@ -1,11 +1,11 @@
 package com.aptzip.dealMap.service;
 
+import com.aptzip.dealMap.dto.query.DetailResult;
 import com.aptzip.dealMap.dto.request.DealListRequest;
 import com.aptzip.dealMap.dto.request.DetailRequest;
 import com.aptzip.dealMap.dto.request.DongRequest;
 import com.aptzip.dealMap.dto.request.GugunRequest;
 import com.aptzip.dealMap.dto.response.*;
-import com.aptzip.dealMap.entity.HouseDeal;
 import com.aptzip.dealMap.repository.DealHouseRepository;
 import com.aptzip.dealMap.repository.DealMapDongRepository;
 import com.aptzip.dealMap.repository.DetailDealRepository;
@@ -78,44 +78,22 @@ public class DealMapService {
                 .collect(Collectors.toList());
     }
 
-    public DetailResponse getDetailByAptSeq(DetailRequest detailRequest) {
-        List<Object[]> result = detailRepository.findDetailByAptSeq(detailRequest.aptSeq());
-
-        Object[] row = result.get(0);
+    public DetailResponse getDealDetailByAptSeq(DetailRequest detailRequest) {
+        DetailResult house = detailRepository.findDetailByAptSeq(detailRequest.aptSeq());
+        List<DetailDealListResponse> detailDealListResponse = detailDealRepository.findByHouseInfoAptSeq(detailRequest.aptSeq());
 
         return new DetailResponse(
-                    (String) row[0],  // aptSeq
-                    (String) row[1],  // aptNm
-                    (String) row[2],  // sidoName
-                    (String) row[3],  // gugunName
-                    (String) row[4],  // dongName
-                    (String) row[5],  // jibun
-                    String.valueOf(row[6]),  // maxAmount
-                    String.valueOf(row[7]),  // minAmount
-                    ((Number) row[8]).longValue(),  // totalDeal
-                    (Integer) row[9]  // buildYear
+                house.aptSeq(),
+                house.aptNm(),
+                house.sidoName(),
+                house.gugunName(),
+                house.dongName(),
+                house.jibun(),
+                house.maxAmount(),
+                house.minAmount(),
+                house.totalDeal(),
+                house.buildYear(),
+                detailDealListResponse
         );
-    }
-
-    public List<DetailListResponse> getDealDetailByAptSeq(DetailRequest detailRequest) {
-
-        List<Object[]> results = detailDealRepository.findByHouseInfoAptSeq(detailRequest.aptSeq());
-
-        return results.stream()
-                .map(result -> {
-                    HouseDeal houseDeal = (HouseDeal) result[0];
-
-                    return new DetailListResponse(
-                            houseDeal.getNo(),               // no
-                            houseDeal.getAptDong(),          // aptDong
-                            houseDeal.getFloor(),            // floor
-                            houseDeal.getDealYear(),         // dealYear
-                            houseDeal.getDealMonth(),        // dealMonth
-                            houseDeal.getDealDay(),          // dealDay
-                            houseDeal.getExcluUseAr().floatValue(), // excluUseAr
-                            houseDeal.getDealAmount()        // dealAmount
-                    );
-                })
-                .collect(Collectors.toList());
     }
 }

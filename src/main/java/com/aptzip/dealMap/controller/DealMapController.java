@@ -49,11 +49,8 @@ public class DealMapController {
     }
 
     @GetMapping("/detail")
-    public ResponseEntity<DetailWrapperResponse> getDealDetail(@RequestParam("aptSeq") DetailRequest aptSeq) {
-        DetailResponse detailResponse = dealMapService.getDetailByAptSeq(aptSeq);
-        List<DetailListResponse> detailListResponse = dealMapService.getDealDetailByAptSeq(aptSeq);
-
-        DetailWrapperResponse wrapperResponse = new DetailWrapperResponse(detailResponse, detailListResponse);
-        return ResponseEntity.ok(wrapperResponse);
+    public ResponseEntity<DetailResponse> getDealDetail(@RequestParam("aptSeq") DetailRequest aptSeq) {
+        DetailResponse detailResponse = dealMapService.getDealDetailByAptSeq(aptSeq);
+        return ResponseEntity.ok(detailResponse);
     }
 }

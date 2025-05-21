@@ -1,6 +1,6 @@
 package com.aptzip.dealMap.dto.response;
 
-public record DetailListResponse(
+public record DetailDealListResponse(
         Integer no,
         String aptDong,
         String floor,
