@@ -14,6 +14,7 @@ public interface ReviewRepository extends JpaRepository<Review, String> {
             SELECT new com.aptzip.review.dto.response.UserReviewListResponse(
                 r.reviewUuid,
                 d.dongName,
+                d.dongCode,
                 r.content,
                 r.createdAt
             )
