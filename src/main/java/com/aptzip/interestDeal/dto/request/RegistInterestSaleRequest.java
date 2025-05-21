@@ -1,14 +1,12 @@
-package com.aptzip.interestDeal.dto.response;
+package com.aptzip.interestDeal.dto.request;
 
-public record SaleListResponse(
-        String saleUuid,
+public record RegistInterestSaleRequest(
         Integer no,
         String aptNm,
         String sidoName,
         String gugunName,
         String dongName,
         String jibun,
-        Integer dealAmount,
         Double latitude,
-        Double longitude    ) {
+        Double longitude ) {
 }

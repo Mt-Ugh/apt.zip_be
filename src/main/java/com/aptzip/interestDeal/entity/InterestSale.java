@@ -4,6 +4,7 @@ import com.aptzip.dealMap.entity.HouseDeal;
 import com.aptzip.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "interest_sale")
@@ -15,6 +16,8 @@ import lombok.*;
 public class InterestSale {
 
     @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "sale_uuid", length = 36)
     private String saleUuid;
 
@@ -33,8 +36,14 @@ public class InterestSale {
     @Column(name = "jibun", length = 10)
     private String jibun;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "no", referencedColumnName = "no", insertable = false, updatable = false)
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "longitude")
+    private Double longitude;
+
+    @ManyToOne
+    @JoinColumn(name = "no", referencedColumnName = "no")
     private HouseDeal houseDeal;
 
     @ManyToOne
