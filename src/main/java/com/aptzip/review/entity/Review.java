@@ -36,9 +36,6 @@ public class Review {
     @Column(name = "updated_at", insertable = false, updatable = false)
     private LocalDateTime updatedAt;
 
-    @Column(name = "deleted_at")
-    private LocalDateTime deletedAt;
-
     @ManyToOne
     @JoinColumn(name = "user_uuid", referencedColumnName = "user_uuid", nullable = false)
     private User user;
