@@ -1,6 +1,5 @@
 package com.aptzip.review.controller;
 
-import com.aptzip.review.dto.request.DongReviewListRequest;
 import com.aptzip.review.dto.request.RegistReviewRequest;
 import com.aptzip.review.dto.response.DongReviewListResponse;
 import com.aptzip.review.dto.response.UserReviewListResponse;
@@ -28,8 +27,8 @@ public class ReviewController {
     }
 
     @GetMapping("/list/dong/{dongCode}")
-    public ResponseEntity<List<DongReviewListResponse>> getDongReviewList(@PathVariable("dongCode") DongReviewListRequest dongReviewListRequest) {
-        List<DongReviewListResponse> dongReviewListResponse = reviewService.getDongReviewList(dongReviewListRequest);
+    public ResponseEntity<List<DongReviewListResponse>> getDongReviewList(@PathVariable("dongCode") String dongCode) {
+        List<DongReviewListResponse> dongReviewListResponse = reviewService.getDongReviewList(dongCode);
         return ResponseEntity.ok(dongReviewListResponse);
     }
 
@@ -37,5 +36,11 @@ public class ReviewController {
     public ResponseEntity<Void> registReview(@AuthenticationPrincipal User user, @RequestBody RegistReviewRequest registReviewRequest) {
         reviewService.registReview(user, registReviewRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("/delete/{reviewUuid}")
+    public ResponseEntity<Void> deleteReview(@AuthenticationPrincipal User user, @PathVariable("reviewUuid") String reviewUuid) {
+        reviewService.deleteReview(user, reviewUuid);
+        return ResponseEntity.ok().build();
     }
 }
