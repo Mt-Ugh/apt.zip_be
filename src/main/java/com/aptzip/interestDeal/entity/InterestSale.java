@@ -21,6 +21,9 @@ public class InterestSale {
     @Column(name = "sale_uuid", length = 36)
     private String saleUuid;
 
+    @Column(name="dong_code", length = 10)
+    private String dongCode;
+
     @Column(name = "apt_nm", length = 40)
     private String aptNm;
 
