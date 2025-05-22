@@ -35,7 +35,8 @@ public class UserService {
                 user.getName(),
                 user.getNickname(),
                 user.getEmail(),
-                user.getPhoneNumber()
+                user.getPhoneNumber(),
+                user.getProfileUrl()
         );
     }
 
