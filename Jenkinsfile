@@ -15,6 +15,20 @@ pipeline {
             }
         }
 
+        stage('Download application.properties from MinIO') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'minio-cred', usernameVariable: 'MINIO_USER', passwordVariable: 'MINIO_PASS')]) {
+                    sh """
+                        mc alias set aptminio http://192.168.35.120:9000 \$MINIO_USER \$MINIO_PASS
+                        mc cp aptminio/aptzip/configs/application.properties ./src/main/resources/application.properties
+                        echo "==== application.properties 내용 확인 ===="
+                        cat ./src/main/resources/application.properties
+                        echo "==========================================="
+                    """
+                }
+            }
+        }
+
         stage('Build JAR') {
             steps {
                 sh './mvnw clean package -DskipTests'
@@ -27,20 +41,8 @@ pipeline {
                     ssh ${REMOTE_USER}@${REMOTE_HOST} 'mkdir -p ${REMOTE_PATH}'
                     scp target/*.jar ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}/${APP_NAME}
                     scp Dockerfile ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}/Dockerfile
+                    scp src/main/resources/application.properties ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}/src/main/resources/application.properties
                 """
-            }
-        }
-
-        stage('Download application.properties from MinIO') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'minio-cred', usernameVariable: 'MINIO_USER', passwordVariable: 'MINIO_PASS')]) {
-                    sh """
-                        mc alias set aptminio http://192.168.35.120:9000 \$MINIO_USER \$MINIO_PASS
-                        mc cp aptminio/aptzip/configs/application.properties ./application.properties
-                        ssh ${REMOTE_USER}@${REMOTE_HOST} 'mkdir -p ${REMOTE_PATH}/src/main/resources'
-                        scp application.properties ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}/src/main/resources/application.properties
-                    """
-                }
             }
         }
 
