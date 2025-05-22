@@ -9,10 +9,10 @@ public record SaleListResponse(
         String gugunName,
         String dongName,
         String jibun,
-        Integer dealAmount,
         Integer dealYear,
         Integer dealMonth,
         Integer dealDay,
+        Integer dealAmount,
         Double latitude,
         Double longitude) {
 }
