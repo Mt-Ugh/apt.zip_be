@@ -16,11 +16,15 @@ public interface InterestSaleRepositiory extends JpaRepository<InterestSale, Str
     @Query("SELECT " +
             "  i.saleUuid, "+
             "  i.houseDeal.no, "+
+            "  h.houseInfo.aptSeq ," +
             "  i.aptNm, " +
             "  i.sidoName, " +
             "  i.gugunName, " +
             "  i.dongName, " +
             "  i.jibun, " +
+            "  i.houseDeal.dealYear, "+
+            "  i.houseDeal.dealMonth,"+
+            "  i.houseDeal.dealDay,"+
             "  h.dealAmount, " +
             "  i.latitude,  " +
             "  i.longitude " +
