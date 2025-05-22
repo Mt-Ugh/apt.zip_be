@@ -2,6 +2,7 @@ package com.aptzip.interestDeal.dto.response;
 
 public record SaleListResponse(
         String saleUuid,
+        String dongCode,
         Integer no,
         String aptSeq,
         String aptNm,
@@ -13,9 +14,6 @@ public record SaleListResponse(
         Integer dealMonth,
         Integer dealDay,
         Integer dealAmount,
-        Integer dealYear,
-        Integer dealMonth,
-        Integer dealDay,
         Double latitude,
         Double longitude) {
 }
