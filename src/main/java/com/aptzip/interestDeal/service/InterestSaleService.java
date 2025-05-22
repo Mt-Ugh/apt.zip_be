@@ -29,19 +29,20 @@ public class InterestSaleService {
         return results.stream()
                 .map(result -> new SaleListResponse(
                         (String) result[0],   //saleUuid
-                        (Integer) result[1], //no
-                        (String) result[2], //apt_seq
-                        (String) result[3],  // aptNm
-                        (String) result[4],  // sidoName
-                        (String) result[5],  // gugunName
-                        (String) result[6],  // dongName
-                        (String) result[7],  // jibun
-                        (Integer) result[8], //dealYear
-                        (Integer) result[9], //dealMonth
-                        (Integer) result[10], //dealDay
-                        (Integer) result[11], // dealAmount
-                        (Double) result[12], //latitude
-                        (Double) result[13]   //longitude
+                        (String) result[1],  //dongCode
+                        (Integer) result[2], //no
+                        (String) result[3], //apt_seq
+                        (String) result[4],  // aptNm
+                        (String) result[5],  // sidoName
+                        (String) result[6],  // gugunName
+                        (String) result[7],  // dongName
+                        (String) result[8],  // jibun
+                        (Integer) result[9], //dealYear
+                        (Integer) result[10], //dealMonth
+                        (Integer) result[11], //dealDay
+                        (Integer) result[12], // dealAmount
+                        (Double) result[13], //latitude
+                        (Double) result[14]   //longitude
                 ))
                 .collect(Collectors.toList());
     }
