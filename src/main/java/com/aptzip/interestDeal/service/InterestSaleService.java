@@ -30,14 +30,18 @@ public class InterestSaleService {
                 .map(result -> new SaleListResponse(
                         (String) result[0],   //saleUuid
                         (Integer) result[1], //no
-                        (String) result[2],  // aptNm
-                        (String) result[3],  // sidoName
-                        (String) result[4],  // gugunName
-                        (String) result[5],  // dongName
-                        (String) result[6],  // jibun
-                        (Integer) result[7], // dealAmount
-                        (Double) result[8], //latitude
-                        (Double) result[9]   //longitude
+                        (String) result[2], //apt_seq
+                        (String) result[3],  // aptNm
+                        (String) result[4],  // sidoName
+                        (String) result[5],  // gugunName
+                        (String) result[6],  // dongName
+                        (String) result[7],  // jibun
+                        (Integer) result[8], //dealYear
+                        (Integer) result[9], //dealMonth
+                        (Integer) result[10], //dealDay
+                        (Integer) result[11], // dealAmount
+                        (Double) result[12], //latitude
+                        (Double) result[13]   //longitude
                 ))
                 .collect(Collectors.toList());
     }
