@@ -4,5 +4,6 @@ public record UserDetailResponse(
         String name,
         String nickname,
         String email,
-        String phoneNumber) {
+        String phoneNumber,
+        String profileUrl) {
 }
