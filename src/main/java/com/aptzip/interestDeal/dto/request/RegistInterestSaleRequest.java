@@ -8,5 +8,5 @@ public record RegistInterestSaleRequest(
         String dongName,
         String jibun,
         Double latitude,
-        Double longitude ) {
+        Double longitude) {
 }

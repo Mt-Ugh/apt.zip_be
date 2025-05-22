@@ -10,5 +10,5 @@ public record SaleListResponse(
         String jibun,
         Integer dealAmount,
         Double latitude,
-        Double longitude    ) {
+        Double longitude) {
 }
