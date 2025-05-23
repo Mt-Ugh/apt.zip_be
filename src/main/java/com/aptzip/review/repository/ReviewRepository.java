@@ -3,6 +3,7 @@ package com.aptzip.review.repository;
 import com.aptzip.review.dto.response.DongReviewListResponse;
 import com.aptzip.review.dto.response.UserReviewListResponse;
 import com.aptzip.review.entity.Review;
+import com.aptzip.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -39,4 +40,6 @@ public interface ReviewRepository extends JpaRepository<Review, String> {
             ORDER BY r.createdAt DESC
             """)
     List<DongReviewListResponse> findReviewsByDongCode(@Param("dongCode") String dongCode);
+
+    void deleteByUser(User user);
 }

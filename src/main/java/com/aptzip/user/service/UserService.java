@@ -1,5 +1,10 @@
 package com.aptzip.user.service;
 
+import com.aptzip.interestArea.entity.InterestArea;
+import com.aptzip.interestArea.repositiory.InterestRepository;
+import com.aptzip.interestDeal.respository.InterestSaleRepositiory;
+import com.aptzip.qna.repository.QnARepository;
+import com.aptzip.review.repository.ReviewRepository;
 import com.aptzip.user.dto.request.AddUserRequest;
 import com.aptzip.user.dto.request.UpdateProfileUrlRequest;
 import com.aptzip.user.dto.request.UpdateUserRequest;
@@ -17,6 +22,10 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final QnARepository qnARepository;
+    private final ReviewRepository reviewRepository;
+    private final InterestRepository interestAreaRepository;
+    private final InterestSaleRepositiory interestSaleRepositiory;
 
     public String save(AddUserRequest addUserRequest) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -70,6 +79,10 @@ public class UserService {
         User user = userRepository.findById(userUuid)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
 
+        qnARepository.deleteByUser(user);
+        reviewRepository.deleteByUser(user);
+        interestAreaRepository.deleteByUser(user);
+        interestSaleRepositiory.deleteByUser(user);
         userRepository.delete(user);
     }
 }
