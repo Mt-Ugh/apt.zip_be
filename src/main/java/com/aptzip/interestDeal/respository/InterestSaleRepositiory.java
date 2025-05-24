@@ -35,4 +35,6 @@ public interface InterestSaleRepositiory extends JpaRepository<InterestSale, Str
     List<Object[]> findByUserUuid(String userUuid);
 
     Optional<InterestSale> findByUserAndHouseDeal(User user, HouseDeal houseDeal);
+
+    void deleteByUser(User user);
 }
