@@ -12,11 +12,6 @@ import com.aptzip.user.dto.request.UpdateUserRequest;
 import com.aptzip.user.dto.response.UserDetailResponse;
 import com.aptzip.user.entity.User;
 import com.aptzip.user.repository.UserRepository;
-import io.minio.BucketExistsArgs;
-import io.minio.MakeBucketArgs;
-import io.minio.MinioClient;
-import io.minio.PutObjectArgs;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.InputStream;
 
 @RequiredArgsConstructor
 @Service
