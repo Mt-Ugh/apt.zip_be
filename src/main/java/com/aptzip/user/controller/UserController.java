@@ -2,14 +2,7 @@ package com.aptzip.user.controller;
 
 import com.aptzip.auth.service.AuthService;
 import com.aptzip.common.util.CookieUtil;
-import com.aptzip.interestArea.entity.InterestArea;
-import com.aptzip.interestArea.service.InterestAreaService;
-import com.aptzip.interestDeal.entity.InterestSale;
-import com.aptzip.interestDeal.service.InterestSaleService;
-import com.aptzip.qna.service.QnAService;
-import com.aptzip.review.service.ReviewService;
 import com.aptzip.user.dto.request.AddUserRequest;
-import com.aptzip.user.dto.request.UpdateProfileUrlRequest;
 import com.aptzip.user.dto.request.UpdateUserRequest;
 import com.aptzip.user.dto.response.UserDetailResponse;
 import com.aptzip.user.entity.User;
@@ -22,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequiredArgsConstructor
@@ -51,8 +45,8 @@ public class UserController {
     }
 
     @PutMapping("/update/profileUrl")
-    public ResponseEntity<Void> updateProfileUrl(@AuthenticationPrincipal User user, @RequestBody UpdateProfileUrlRequest updateProfileUrlRequest) {
-        userService.updateProfileUrl(user.getUserUuid(), updateProfileUrlRequest);
+    public ResponseEntity<Void> updateProfileUrl(@AuthenticationPrincipal User user, @RequestParam("image") MultipartFile image) {
+        userService.updateProfileUrl(user.getUserUuid(), image);
         return ResponseEntity.ok().build();
     }
 
