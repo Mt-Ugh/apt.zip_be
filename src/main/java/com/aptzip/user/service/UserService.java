@@ -80,13 +80,13 @@ public class UserService {
     }
 
     @Transactional
-    public void updateProfileUrl(String userUuid, MultipartFile profileUrl) {
+    public void updateProfileImage(String userUuid, MultipartFile profileImage) {
         try {
             User user = userRepository.findById(userUuid)
                     .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
 
-            String objectName = "profile_" + userUuid + "_" + System.currentTimeMillis() + "." + getExtension(profileUrl.getOriginalFilename());
-            String imageUrl = minioService.uploadFile(profileUrl, objectName);
+            String objectName = "profile_" + userUuid + "_" + System.currentTimeMillis() + "." + getExtension(profileImage.getOriginalFilename());
+            String imageUrl = minioService.uploadFile(profileImage, objectName);
             if (user.getProfileUrl() != null) {
                 String oldObjectName = extractObjectNameFromUrl(user.getProfileUrl());
                 minioService.deleteFile(oldObjectName);

@@ -44,9 +44,9 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/update/profileUrl")
-    public ResponseEntity<Void> updateProfileUrl(@AuthenticationPrincipal User user, @RequestParam("profileImage") MultipartFile image) {
-        userService.updateProfileUrl(user.getUserUuid(), image);
+    @PutMapping("/update/profile/image")
+    public ResponseEntity<Void> updateProfileImage(@AuthenticationPrincipal User user, @RequestParam("profileImage") MultipartFile profileImage) {
+        userService.updateProfileImage(user.getUserUuid(), profileImage);
         return ResponseEntity.ok().build();
     }
 
