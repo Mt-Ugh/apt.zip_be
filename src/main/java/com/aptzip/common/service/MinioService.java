@@ -48,7 +48,7 @@ public class MinioService {
                             .build()
             );
         }
-        return "https://" + minioUrl + "/" + bucketName + "/" + objectName;
+        return minioUrl + "/" + bucketName + "/" + objectName;
     }
 
     public void deleteFile(String objectName) throws Exception {
