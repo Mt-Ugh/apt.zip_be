@@ -20,7 +20,7 @@ public class AmenitiesMapController {
     private final AmenitiesMapService amenitiesMapService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<AmenitiesListResponse>> getList( @RequestParam String dongCode, @RequestParam String majorCategory) {
+    public ResponseEntity<List<AmenitiesListResponse>> getList(@RequestParam String dongCode, @RequestParam List<String> majorCategory) {
         AmenitiesListRequest amenitiesListRequest = new AmenitiesListRequest(dongCode, majorCategory);
         List<AmenitiesListResponse> results = amenitiesMapService.getAmenitiesMapList(amenitiesListRequest);
         return ResponseEntity.ok(results);
