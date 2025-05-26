@@ -58,6 +58,7 @@ public class InterestSaleService {
 
         InterestSale interestSale = InterestSale.builder()
                 .user(user)
+                .dongCode(registRequest.dongCode())
                 .houseDeal(deal)
                 .aptNm(registRequest.aptNm())
                 .sidoName(registRequest.sidoName())
