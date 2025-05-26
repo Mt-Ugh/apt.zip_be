@@ -43,4 +43,6 @@ public interface InterestRepository extends JpaRepository<InterestArea, String> 
     void deleteByUserUuidAndAreaUuid(String userUuid, String areaUuid);
 
     List<InterestArea> findByUser(User user);
+
+    void deleteByUser(User user);
 }
