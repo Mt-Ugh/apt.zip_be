@@ -29,6 +29,7 @@ public class InterestAreaService {
 
         return interestAreas.stream()
                 .map(ia -> InterestListResponse.builder()
+                        .areaUuid(ia.getArea().getAreaUuid())
                         .areaName(ia.getArea().getName())
                         .explain(ia.getArea().getExplain())
                         .areaUrl(ia.getArea().getAreaUrl())

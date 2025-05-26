@@ -9,6 +9,7 @@ import com.aptzip.interestDeal.entity.InterestSale;
 import com.aptzip.interestDeal.respository.InterestSaleRepositiory;
 import com.aptzip.user.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,11 +54,12 @@ public class InterestSaleService {
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected no"));
 
         if(interestSaleRepositiory.findByUserAndHouseDeal(user, deal).isPresent()){
-            throw new IllegalStateException("이미 관심 매물로 등록된 건입니다.");
+            throw new DataIntegrityViolationException("이미 관심 매물로 등록된 건입니다.");
         }
 
         InterestSale interestSale = InterestSale.builder()
                 .user(user)
+                .dongCode(registRequest.dongCode())
                 .houseDeal(deal)
                 .aptNm(registRequest.aptNm())
                 .sidoName(registRequest.sidoName())

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 @Builder
 public record InterestListResponse(
+        String areaUuid,
         String areaName,
         String explain,
         String areaUrl,

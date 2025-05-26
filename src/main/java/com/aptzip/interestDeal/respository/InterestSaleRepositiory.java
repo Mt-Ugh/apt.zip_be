@@ -15,6 +15,7 @@ public interface InterestSaleRepositiory extends JpaRepository<InterestSale, Str
 
     @Query("SELECT " +
             "  i.saleUuid, "+
+            "  i.dongCode, "+
             "  i.houseDeal.no, "+
             "  h.houseInfo.aptSeq ," +
             "  i.aptNm, " +
@@ -34,4 +35,6 @@ public interface InterestSaleRepositiory extends JpaRepository<InterestSale, Str
     List<Object[]> findByUserUuid(String userUuid);
 
     Optional<InterestSale> findByUserAndHouseDeal(User user, HouseDeal houseDeal);
+
+    void deleteByUser(User user);
 }
