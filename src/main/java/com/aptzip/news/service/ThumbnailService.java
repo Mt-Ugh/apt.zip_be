@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ThumbnailService {
 
-    @Cacheable(value = "newsThumbnail", key = "#url")
+    @Cacheable(value = "newsThumbnail", key = "#url", unless = "#result == null")
     public String extractOgImage(String url) {
         try {
             Document doc = Jsoup.connect(url).get();
