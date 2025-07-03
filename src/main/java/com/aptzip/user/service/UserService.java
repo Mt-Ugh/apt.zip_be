@@ -2,7 +2,7 @@ package com.aptzip.user.service;
 
 import com.aptzip.common.service.MinioService;
 import com.aptzip.interestArea.repositiory.InterestRepository;
-import com.aptzip.interestDeal.respository.InterestSaleRepositiory;
+import com.aptzip.interestSale.respository.InterestSaleRepositiory;
 import com.aptzip.qna.entity.QnA;
 import com.aptzip.qna.repository.AnswerRepository;
 import com.aptzip.qna.repository.QnARepository;

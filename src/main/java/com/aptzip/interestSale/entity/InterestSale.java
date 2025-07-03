@@ -1,4 +1,4 @@
-package com.aptzip.interestDeal.entity;
+package com.aptzip.interestSale.entity;
 
 import com.aptzip.dealMap.entity.HouseDeal;
 import com.aptzip.user.entity.User;

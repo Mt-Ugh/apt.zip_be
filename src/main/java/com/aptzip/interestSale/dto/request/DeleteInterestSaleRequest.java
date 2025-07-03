@@ -1,4 +1,4 @@
-package com.aptzip.interestDeal.dto.request;
+package com.aptzip.interestSale.dto.request;
 
 import java.util.List;
 

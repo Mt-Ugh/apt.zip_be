@@ -1,9 +1,10 @@
-package com.aptzip.interestDeal.controller;
+package com.aptzip.interestSale.controller;
 
-import com.aptzip.interestDeal.dto.request.DeleteInterestSaleRequest;
-import com.aptzip.interestDeal.dto.request.RegistInterestSaleRequest;
-import com.aptzip.interestDeal.dto.response.SaleListResponse;
-import com.aptzip.interestDeal.service.InterestSaleService;
+
+import com.aptzip.interestSale.dto.request.DeleteInterestSaleRequest;
+import com.aptzip.interestSale.dto.request.RegistInterestSaleRequest;
+import com.aptzip.interestSale.dto.response.SaleListResponse;
+import com.aptzip.interestSale.service.InterestSaleService;
 import com.aptzip.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,13 +28,13 @@ public class InterestSaleController {
         return ResponseEntity.ok(result);
     }
 
-    @PostMapping("/regist")
+    @PostMapping("/list")
     public ResponseEntity<Void> saveSale(@AuthenticationPrincipal User user, @RequestBody RegistInterestSaleRequest registRequest){
         interestSaleService.saleSave(user, registRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/list")
     public ResponseEntity<Void> deleteSale(@RequestBody DeleteInterestSaleRequest deleteInterestSaleRequest){
         interestSaleService.deleteSale(deleteInterestSaleRequest);
         return ResponseEntity.ok().build();

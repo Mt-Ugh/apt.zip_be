@@ -1,4 +1,4 @@
-package com.aptzip.interestDeal.dto.response;
+package com.aptzip.interestSale.dto.response;
 
 public record SaleListResponse(
         String saleUuid,

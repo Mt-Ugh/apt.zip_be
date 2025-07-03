@@ -1,7 +1,7 @@
-package com.aptzip.interestDeal.respository;
+package com.aptzip.interestSale.respository;
 
 import com.aptzip.dealMap.entity.HouseDeal;
-import com.aptzip.interestDeal.entity.InterestSale;
+import com.aptzip.interestSale.entity.InterestSale;
 import com.aptzip.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
