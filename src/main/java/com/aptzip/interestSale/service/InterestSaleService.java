@@ -1,12 +1,12 @@
-package com.aptzip.interestDeal.service;
+package com.aptzip.interestSale.service;
 
 import com.aptzip.dealMap.entity.HouseDeal;
 import com.aptzip.dealMap.repository.DealHouseRepository;
-import com.aptzip.interestDeal.dto.request.DeleteInterestSaleRequest;
-import com.aptzip.interestDeal.dto.request.RegistInterestSaleRequest;
-import com.aptzip.interestDeal.dto.response.SaleListResponse;
-import com.aptzip.interestDeal.entity.InterestSale;
-import com.aptzip.interestDeal.respository.InterestSaleRepositiory;
+import com.aptzip.interestSale.dto.request.DeleteInterestSaleRequest;
+import com.aptzip.interestSale.dto.request.RegistInterestSaleRequest;
+import com.aptzip.interestSale.dto.response.SaleListResponse;
+import com.aptzip.interestSale.entity.InterestSale;
+import com.aptzip.interestSale.respository.InterestSaleRepositiory;
 import com.aptzip.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
