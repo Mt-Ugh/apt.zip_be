@@ -28,13 +28,13 @@ public class InterestSaleController {
         return ResponseEntity.ok(result);
     }
 
-    @PostMapping("/list")
+    @PostMapping("/")
     public ResponseEntity<Void> saveSale(@AuthenticationPrincipal User user, @RequestBody RegistInterestSaleRequest registRequest){
         interestSaleService.saleSave(user, registRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @DeleteMapping("/list")
+    @DeleteMapping("/")
     public ResponseEntity<Void> deleteSale(@RequestBody DeleteInterestSaleRequest deleteInterestSaleRequest){
         interestSaleService.deleteSale(deleteInterestSaleRequest);
         return ResponseEntity.ok().build();
